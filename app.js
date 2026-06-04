@@ -7,6 +7,7 @@ const areaSelect = document.querySelector("#job-area");
 const jobCards = Array.from(document.querySelectorAll(".job-card"));
 const jobCount = document.querySelector("#job-count");
 const roleInput = document.querySelector("#role-input");
+const aetherCanvas = document.querySelector("#aether-canvas");
 
 function showToast(message) {
   toast.textContent = message;
@@ -97,3 +98,96 @@ if (window.lucide) {
     },
   });
 }
+
+function initAetherCanvas() {
+  if (!aetherCanvas) return;
+  const ctx = aetherCanvas.getContext("2d");
+  if (!ctx) return;
+
+  const mouse = { x: null, y: null, radius: 180 };
+  let particles = [];
+  let frameId = 0;
+
+  function resizeCanvas() {
+    const rect = aetherCanvas.parentElement.getBoundingClientRect();
+    aetherCanvas.width = Math.max(320, Math.floor(rect.width));
+    aetherCanvas.height = Math.max(520, Math.floor(rect.height));
+    particles = [];
+    const particleCount = Math.min(128, Math.max(44, Math.floor((aetherCanvas.width * aetherCanvas.height) / 12000)));
+    for (let i = 0; i < particleCount; i += 1) {
+      particles.push({
+        x: Math.random() * aetherCanvas.width,
+        y: Math.random() * aetherCanvas.height,
+        vx: Math.random() * 0.4 - 0.2,
+        vy: Math.random() * 0.4 - 0.2,
+        size: Math.random() * 2 + 1,
+      });
+    }
+  }
+
+  function drawParticle(particle) {
+    ctx.beginPath();
+    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(73, 215, 255, 0.82)";
+    ctx.fill();
+  }
+
+  function animate() {
+    frameId = requestAnimationFrame(animate);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.9)";
+    ctx.fillRect(0, 0, aetherCanvas.width, aetherCanvas.height);
+
+    particles.forEach((particle, index) => {
+      if (particle.x > aetherCanvas.width || particle.x < 0) particle.vx *= -1;
+      if (particle.y > aetherCanvas.height || particle.y < 0) particle.vy *= -1;
+
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - particle.x;
+        const dy = mouse.y - particle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (distance < mouse.radius) {
+          const force = (mouse.radius - distance) / mouse.radius;
+          particle.x -= (dx / distance) * force * 4;
+          particle.y -= (dy / distance) * force * 4;
+        }
+      }
+
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+      drawParticle(particle);
+
+      for (let next = index; next < particles.length; next += 1) {
+        const other = particles[next];
+        const dx = particle.x - other.x;
+        const dy = particle.y - other.y;
+        const distance = dx * dx + dy * dy;
+        if (distance < 9000) {
+          ctx.strokeStyle = `rgba(47, 140, 255, ${1 - distance / 9000})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particle.x, particle.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.stroke();
+        }
+      }
+    });
+  }
+
+  function updateMouse(event) {
+    const rect = aetherCanvas.getBoundingClientRect();
+    mouse.x = event.clientX - rect.left;
+    mouse.y = event.clientY - rect.top;
+  }
+
+  resizeCanvas();
+  animate();
+  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("mousemove", updateMouse);
+  window.addEventListener("mouseout", () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+  window.addEventListener("pagehide", () => cancelAnimationFrame(frameId), { once: true });
+}
+
+initAetherCanvas();
