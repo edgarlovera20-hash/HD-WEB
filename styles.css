@@ -1,3 +1,7 @@
+@import url("design-system/tokens/index.css");
+@import url("design-system/components/components.css");
+@import url("design-system/layouts/layouts.css");
+
 :root {
   --bg: #060a14;
   --bg-2: #0b1222;
@@ -216,7 +220,7 @@ textarea {
 h1,
 h2,
 h3 {
-  font-family: "Space Grotesk", Inter, sans-serif;
+  font-family: var(--hd-font-secondary);
   letter-spacing: 0;
   margin: 0;
 }
@@ -305,7 +309,7 @@ h1 {
 
 .metric-grid strong {
   display: block;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--hd-font-secondary);
   font-size: 30px;
 }
 
@@ -453,7 +457,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   color: #dbe8f7;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--hd-font-secondary);
   font-size: 20px;
   font-weight: 700;
   padding: 18px 42px;
@@ -517,7 +521,7 @@ h1 {
 
 .filter-stat strong {
   display: block;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--hd-font-secondary);
   font-size: 36px;
 }
 

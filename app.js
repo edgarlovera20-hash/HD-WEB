@@ -89,3 +89,11 @@ document.querySelector(".contact-form").addEventListener("submit", (event) => {
 document.querySelectorAll("[data-toast]").forEach((button) => {
   button.addEventListener("click", () => showToast(button.dataset.toast));
 });
+
+if (window.lucide) {
+  window.lucide.createIcons({
+    attrs: {
+      "stroke-width": 1.9,
+    },
+  });
+}
