@@ -2,6 +2,25 @@
 @import url("design-system/components/components.css");
 @import url("design-system/layouts/layouts.css");
 
+/* Ensure any locally-hosted or future @font-face declarations use swap
+   to avoid invisible text while fonts load (FOIT prevention).
+   Google Fonts is already requested with &display=swap in index.html. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: local('Inter');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: local('Poppins');
+}
+
 :root {
   --bg: #091623;
   --panel: rgba(9, 22, 35, 0.86);

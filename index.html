@@ -12,8 +12,11 @@
     <link rel="icon" type="image/png" href="assets/heavenly-dreams-logo.png" />
     <link rel="apple-touch-icon" href="assets/heavenly-dreams-logo.png" />
     <meta property="og:image" content="assets/heavenly-dreams-logo.png" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://wa.me" />
+    <link rel="dns-prefetch" href="https://api.heavenlydreams.com.mx" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -26,7 +29,7 @@
 
     <header class="topbar">
       <a class="brand" href="#portada" aria-label="Heavenly Dreams inicio">
-        <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" />
+        <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" fetchpriority="high" />
         <span>Heavenly Dreams</span>
       </a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -63,7 +66,7 @@
           <div class="city-skyline" aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span>
           </div>
-          <img src="assets/heavenly-dreams-brand.png" alt="Identidad corporativa Heavenly Dreams" />
+          <img src="assets/heavenly-dreams-brand.png" alt="Identidad corporativa Heavenly Dreams" loading="lazy" />
         </div>
         <div class="copy-panel">
           <p class="kicker">Quienes somos</p>
@@ -94,7 +97,7 @@
 
       <section class="scene orbit-scene" id="valores" data-scene>
         <div class="orbit-core">
-          <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" />
+          <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" loading="lazy" />
           <span>Valores</span>
         </div>
         <div class="value-orbit">
@@ -178,7 +181,7 @@
 
       <section class="scene ai-scene" id="agente" data-scene>
         <div class="ai-hologram">
-          <img src="assets/chatbot-icon.png" alt="Icono del agente IA Heavenly Dreams" />
+          <img src="assets/chatbot-icon.png" alt="Icono del agente IA Heavenly Dreams" loading="lazy" />
           <div class="holo-ring"></div>
         </div>
         <div class="ai-panel">
@@ -220,7 +223,7 @@
       </section>
 
       <section class="scene closing-scene" id="cierre" data-scene>
-        <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" />
+        <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" loading="lazy" />
         <h2>Construimos conexiones que transforman empresas y cambian vidas</h2>
         <a class="button primary" href="#portada">Comenzar ahora</a>
       </section>
@@ -228,11 +231,11 @@
 
     <aside class="chat-widget" id="chat-widget" aria-live="polite">
       <button class="chat-fab" type="button" data-open-chat aria-label="Abrir chat de Heavenly Dreams AI">
-        <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" />
+        <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" />
       </button>
       <section class="chat-window" aria-label="Chat IA">
         <header>
-          <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" />
+          <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" />
           <div><strong>Heavenly Dreams AI</strong><span>Reclutamiento y servicios</span></div>
           <button type="button" data-close-chat aria-label="Cerrar">x</button>
         </header>
