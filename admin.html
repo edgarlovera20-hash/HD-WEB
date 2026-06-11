@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#091623" />
+    <title>Panel administrativo | Heavenly Dreams SAS de CV</title>
+    <link rel="icon" type="image/png" href="assets/heavenly-dreams-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-body">
+    <div class="ambient-grid" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Volver al sitio">
+        <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" />
+        <span>Panel administrativo</span>
+      </a>
+      <nav id="site-nav" class="admin-nav" aria-label="Navegacion del panel">
+        <a href="index.html">Ver sitio público</a>
+        <button class="nav-cta" type="button" id="logout-button" hidden>Cerrar sesión</button>
+      </nav>
+    </header>
+
+    <main class="admin-main">
+      <!-- Acceso -->
+      <section class="admin-login" id="admin-login">
+        <form class="glass-panel login-card" id="login-form">
+          <p class="kicker">Acceso restringido</p>
+          <h2>Equipo de reclutamiento</h2>
+          <p class="muted">Ingresa la clave de acceso del panel.</p>
+          <label>Clave de acceso <input type="password" id="admin-key" required autocomplete="current-password" /></label>
+          <button class="button primary full" type="submit">Entrar</button>
+          <p class="muted small">Prototipo: la clave inicial es <strong>HD2026</strong>. Cámbiala al conectar un backend real.</p>
+        </form>
+      </section>
+
+      <!-- Panel -->
+      <section class="admin-panel" id="admin-panel" hidden>
+        <div class="section-title">
+          <p class="kicker">Resumen</p>
+          <h2>Seguimiento de candidatos y entrevistas</h2>
+        </div>
+
+        <div class="stats-grid admin-stats" id="admin-stats"></div>
+
+        <div class="admin-toolbar">
+          <label>Vacante
+            <select id="filter-vacante">
+              <option value="">Todas</option>
+            </select>
+          </label>
+          <label>Estado
+            <select id="filter-estado">
+              <option value="">Todos</option>
+            </select>
+          </label>
+          <label class="grow">Buscar
+            <input id="filter-busqueda" type="search" placeholder="Nombre, teléfono o correo" />
+          </label>
+          <button class="button ghost" type="button" id="export-button">Exportar CSV</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>Vacante</th>
+                <th>Estado</th>
+                <th>Entrevista</th>
+                <th>Medio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="candidates-body"></tbody>
+          </table>
+          <p class="muted" id="empty-message" hidden>Todavía no hay candidatos registrados con estos filtros.</p>
+        </div>
+
+        <div class="section-title">
+          <p class="kicker">Agenda</p>
+          <h2>Entrevistas agendadas</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Candidato</th>
+                <th>Vacante</th>
+                <th>Asistencia</th>
+              </tr>
+            </thead>
+            <tbody id="interviews-body"></tbody>
+          </table>
+          <p class="muted" id="empty-interviews" hidden>No hay entrevistas agendadas.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal: perfil del candidato -->
+    <div class="modal" id="profile-modal" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
+        <div id="profile-body"></div>
+      </div>
+    </div>
+
+    <!-- Modal: reagendar -->
+    <div class="modal" id="reschedule-modal" hidden>
+      <div class="modal-card wizard" role="dialog" aria-modal="true">
+        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
+        <h3>Reagendar entrevista</h3>
+        <p class="schedule-candidate" id="reschedule-candidate"></p>
+        <p class="field-label">Nueva fecha</p>
+        <div class="chip-grid" id="reschedule-dates"></div>
+        <p class="field-label">Nuevo horario</p>
+        <div class="chip-grid" id="reschedule-hours"><p class="muted">Primero selecciona una fecha.</p></div>
+        <div class="wizard-actions">
+          <button class="button accent full" type="button" id="reschedule-confirm" disabled>Confirmar nueva fecha</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="store.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
