@@ -2,43 +2,18 @@
 @import url("design-system/components/components.css");
 @import url("design-system/layouts/layouts.css");
 
-/* Ensure any locally-hosted or future @font-face declarations use swap
-   to avoid invisible text while fonts load (FOIT prevention).
-   Google Fonts is already requested with &display=swap in index.html. */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: local('Inter');
-}
-
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: local('Poppins');
-}
-
-/* ================================================
-   HD DESIGN SYSTEM — Heavenly Dreams
-   Sitio principal heavenlydreams.com.mx
-================================================ */
-
 :root {
-  /* Tokens originales del sitio (preservados) */
-  --bg: #02040a;
-  --panel: rgba(10, 18, 32, 0.78);
-  --panel-strong: rgba(15, 23, 42, 0.92);
-  --line: rgba(34, 211, 238, 0.28);
+  --bg: #091623;
+  --panel: rgba(9, 22, 35, 0.86);
+  --panel-strong: rgba(7, 19, 31, 0.94);
+  --line: rgba(6, 170, 177, 0.22);
   --text: #f3f8ff;
   --muted: #94a3b8;
-  --blue: #0066ff;
-  --cyan: #00d9ff;
-  --violet: #7c3aed;
-  --green: #22c55e;
-  --orange: #f59e0b;
+  --blue: #0071BC;
+  --cyan: #01EEEE;
+  --violet: #06AAB1;
+  --green: #29d977;
+  --orange: #ff9a45;
   --shadow: 0 34px 120px rgba(0, 0, 0, 0.46);
 
   /* HD Design System tokens v2 */
@@ -74,9 +49,6 @@
 /* --- HD Typography --- */
 html, body {
   font-family: var(--hd-font-body);
-  font-weight: 400;
-  color: var(--hd-text);
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -87,7 +59,7 @@ h1, h2, h3 {
   letter-spacing: -0.04em;
 }
 
-/* --- HD Classes --- */
+/* --- HD Utility Classes --- */
 .hd-page {
   min-height: 100vh;
   background:
