@@ -3,15 +3,15 @@
 @import url("design-system/layouts/layouts.css");
 
 :root {
-  --bg: #020612;
-  --panel: rgba(8, 20, 42, 0.66);
-  --panel-strong: rgba(11, 27, 54, 0.88);
-  --line: rgba(119, 188, 255, 0.22);
+  --bg: #091623;
+  --panel: rgba(9, 22, 35, 0.86);
+  --panel-strong: rgba(7, 19, 31, 0.94);
+  --line: rgba(6, 170, 177, 0.22);
   --text: #f3f8ff;
-  --muted: #a7b6c9;
-  --blue: #1684ff;
-  --cyan: #39dcff;
-  --violet: #8b5cff;
+  --muted: #94a3b8;
+  --blue: #0071BC;
+  --cyan: #01EEEE;
+  --violet: #06AAB1;
   --green: #29d977;
   --orange: #ff9a45;
   --shadow: 0 34px 120px rgba(0, 0, 0, 0.46);
@@ -29,9 +29,9 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 48% 8%, rgba(22, 132, 255, 0.2), transparent 32%),
-    radial-gradient(circle at 78% 50%, rgba(139, 92, 255, 0.13), transparent 30%),
-    linear-gradient(180deg, #020612 0%, #061329 42%, #020612 100%);
+    radial-gradient(circle at 48% 8%, rgba(1, 238, 238, 0.12), transparent 32%),
+    radial-gradient(circle at 78% 50%, rgba(6, 170, 177, 0.10), transparent 30%),
+    linear-gradient(135deg, #0071BC 0%, #0155A1 100%);
   color: var(--text);
   font-family: Inter, system-ui, sans-serif;
   letter-spacing: 0;
@@ -39,7 +39,7 @@ body {
 }
 
 body::selection {
-  background: rgba(57, 220, 255, 0.28);
+  background: rgba(1, 238, 238, 0.28);
 }
 
 a {
@@ -259,7 +259,7 @@ p {
 .primary {
   background: linear-gradient(135deg, var(--cyan), var(--blue));
   color: #031120;
-  box-shadow: 0 16px 42px rgba(22, 132, 255, 0.28);
+  box-shadow: 0 16px 42px rgba(1, 238, 238, 0.28);
 }
 
 .ghost {
