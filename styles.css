@@ -21,137 +21,23 @@
   src: local('Poppins');
 }
 
-/* ================================================
-   HD DESIGN SYSTEM — Heavenly Dreams
-   Sitio principal heavenlydreams.com.mx
-================================================ */
-
 :root {
-  /* Tokens originales del sitio (preservados) */
-  --bg: #02040a;
-  --panel: rgba(10, 18, 32, 0.78);
-  --panel-strong: rgba(15, 23, 42, 0.92);
-  --line: rgba(34, 211, 238, 0.28);
+  --bg: #091623;
+  --panel: rgba(9, 22, 35, 0.86);
+  --panel-strong: rgba(7, 19, 31, 0.94);
+  --line: rgba(6, 170, 177, 0.22);
   --text: #f3f8ff;
   --muted: #94a3b8;
-  --blue: #0066ff;
-  --cyan: #00d9ff;
-  --violet: #7c3aed;
-  --green: #22c55e;
-  --orange: #f59e0b;
+  --blue: #0071BC;
+  --cyan: #01EEEE;
+  --violet: #06AAB1;
+  --green: #29d977;
+  --orange: #ff9a45;
   --shadow: 0 34px 120px rgba(0, 0, 0, 0.46);
-
-  /* HD Design System tokens v2 */
-  --hd-bg: #02040a;
-  --hd-bg-soft: #050816;
-  --hd-surface: rgba(10, 18, 32, 0.78);
-  --hd-surface-strong: rgba(15, 23, 42, 0.92);
-  --hd-cyan: #00d9ff;
-  --hd-blue: #0066ff;
-  --hd-blue-soft: #2563eb;
-  --hd-purple: #7c3aed;
-  --hd-text: #ffffff;
-  --hd-text-muted: #94a3b8;
-  --hd-border: rgba(34, 211, 238, 0.28);
-  --hd-success: #22c55e;
-  --hd-warning: #f59e0b;
-  --hd-danger: #ef4444;
-  --hd-radius-sm: 10px;
-  --hd-radius-md: 16px;
-  --hd-radius-lg: 24px;
-  --hd-shadow-cyan: 0 0 28px rgba(0, 217, 255, 0.25);
-  --hd-shadow-blue: 0 0 32px rgba(37, 99, 235, 0.25);
-  --hd-font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --hd-font-title: 'Sora', 'Montserrat', system-ui, sans-serif;
-  --hd-font-display: 'Montserrat', 'Sora', system-ui, sans-serif;
-  --hd-font-mono: 'Space Grotesk', 'Inter', system-ui, sans-serif;
 }
 
 * {
   box-sizing: border-box;
-}
-
-/* --- HD Typography --- */
-html, body {
-  font-family: var(--hd-font-body);
-  font-weight: 400;
-  color: var(--hd-text);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3 {
-  font-family: var(--hd-font-title);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-}
-
-/* --- HD Classes --- */
-.hd-page {
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(0, 217, 255, 0.18), transparent 32%),
-    radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 35%),
-    linear-gradient(135deg, #02040a 0%, #050816 45%, #02040a 100%);
-  color: var(--hd-text);
-}
-
-.hd-card {
-  background: var(--hd-surface);
-  border: 1px solid var(--hd-border);
-  border-radius: var(--hd-radius-lg);
-  box-shadow: var(--hd-shadow-cyan);
-  backdrop-filter: blur(18px);
-}
-
-.hd-button {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 44px; padding: 10px 18px; border-radius: 999px;
-  background: linear-gradient(135deg, var(--hd-cyan), var(--hd-blue), var(--hd-purple));
-  color: white; font-family: var(--hd-font-body); font-weight: 700;
-  border: none; box-shadow: var(--hd-shadow-blue); transition: all 0.25s ease; cursor: pointer;
-  text-decoration: none;
-}
-.hd-button:hover { transform: translateY(-1px); filter: brightness(1.12); }
-
-.hd-button-secondary {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 44px; padding: 10px 18px; border-radius: 999px;
-  background: rgba(15, 23, 42, 0.78); color: white;
-  font-family: var(--hd-font-body); font-weight: 700;
-  border: 1px solid rgba(34, 211, 238, 0.28);
-  box-shadow: 0 0 24px rgba(0, 217, 255, 0.16);
-  backdrop-filter: blur(14px); transition: all 0.25s ease; cursor: pointer;
-  text-decoration: none;
-}
-.hd-button-secondary:hover { transform: translateY(-1px); border-color: rgba(0, 217, 255, 0.65); box-shadow: 0 0 28px rgba(0, 217, 255, 0.28); }
-
-.hd-input {
-  width: 100%; background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(34, 211, 238, 0.25); color: white;
-  border-radius: 14px; padding: 12px 14px; transition: all 0.25s ease;
-}
-.hd-input::placeholder { color: var(--hd-text-muted); }
-.hd-input:focus { outline: none; border-color: var(--hd-cyan); box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.16); }
-
-.hd-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 700;
-  color: var(--hd-cyan); background: rgba(0, 217, 255, 0.1);
-  border: 1px solid rgba(0, 217, 255, 0.25);
-}
-
-.hd-gradient-title {
-  font-family: var(--hd-font-title);
-  font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em;
-  background: linear-gradient(135deg, #ffffff 0%, #00d9ff 45%, #7c3aed 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-
-.hd-metric {
-  font-family: var(--hd-font-mono);
-  font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1; font-weight: 800; letter-spacing: -0.05em;
 }
 
 html {
@@ -1392,7 +1278,7 @@ main { padding-top: 64px; min-height: 100vh; }
 .step-item.active { color: var(--hd-cyan); }
 .step-item.active span { background: rgba(0,217,255,0.2); border-color: var(--hd-cyan); color: var(--hd-cyan); }
 .step-item.done span { background: rgba(0,217,255,0.25); border-color: var(--hd-cyan); color: var(--hd-cyan); }
-.step-item.done span::after { content: '✓'; }
+.step-item.done span::after { content: '\2713'; }
 
 /* Step summary */
 .step-summary { background: rgba(0,217,255,0.04); border: 1px solid rgba(0,217,255,0.1); border-radius: 12px; padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
@@ -1438,7 +1324,7 @@ main { padding-top: 64px; min-height: 100vh; }
 /* Req list */
 .req-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .6rem; }
 .req-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .9rem; color: var(--hd-text-muted); }
-.req-list li::before { content: '✓'; color: var(--hd-cyan); font-weight: 800; flex-shrink: 0; }
+.req-list li::before { content: '\2713'; color: var(--hd-cyan); font-weight: 800; flex-shrink: 0; }
 
 /* Benefits card */
 .benefits-card { padding: 2rem; }
