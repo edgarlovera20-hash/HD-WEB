@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate HD-WEB
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout HD-WEB
+        uses: actions/checkout@v4
+        with:
+          path: HD-WEB
+
+      - name: Checkout HD-CORE
+        uses: actions/checkout@v4
+        with:
+          repository: edgarlovera20-hash/HD-CORE
+          path: HD-CORE
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: HD-WEB
+        run: npm install
+
+      - name: Typecheck
+        working-directory: HD-WEB
+        run: npm run typecheck
+
+      - name: Test
+        working-directory: HD-WEB
+        run: npm test
