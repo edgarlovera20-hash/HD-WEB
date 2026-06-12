@@ -1,0 +1,166 @@
+openapi: 3.1.0
+info:
+  title: Heavenly Dreams CRM API
+  version: 0.1.0
+  description: Initial API contract for HD-CRM. This contract defines customer follow-up, account status, conversations, commitments and audit-safe automation boundaries.
+servers:
+  - url: https://crm.heavenlydreams.com.mx/api/v1
+security:
+  - bearerAuth: []
+paths:
+  /clients:
+    get:
+      summary: List clients visible to the current user
+      operationId: listClients
+      tags: [Clients]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [new, active, follow_up, overdue, recovered, inactive]
+        - name: assignedTo
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Client list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Client'
+    post:
+      summary: Create client
+      operationId: createClient
+      tags: [Clients]
+      x-required-permission: crm.clients.create
+      responses:
+        '201':
+          description: Client created
+  /clients/{clientId}:
+    get:
+      summary: Get client detail
+      operationId: getClient
+      tags: [Clients]
+      x-required-permission: crm.clients.view
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      responses:
+        '200':
+          description: Client detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+  /clients/{clientId}/assignments:
+    post:
+      summary: Assign client to agent or team
+      operationId: assignClient
+      tags: [Assignments]
+      x-required-permission: crm.assignments.create
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      responses:
+        '201':
+          description: Assignment created
+  /clients/{clientId}/followups:
+    post:
+      summary: Create follow-up task
+      operationId: createFollowup
+      tags: [Followups]
+      x-required-permission: crm.followups.create
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      responses:
+        '201':
+          description: Follow-up created
+  /clients/{clientId}/conversations:
+    post:
+      summary: Start or register an approved conversation
+      operationId: createConversation
+      tags: [Conversations]
+      x-required-permission: crm.conversations.start_approved_template
+      x-requires-audit: true
+      x-policy: approved_template_required
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      responses:
+        '201':
+          description: Conversation created
+        '403':
+          description: Missing permission, consent, policy or allowed contact window
+  /clients/{clientId}/payment-commitments:
+    post:
+      summary: Register client payment commitment
+      operationId: createPaymentCommitment
+      tags: [PaymentCommitments]
+      x-required-permission: crm.payment_commitments.create
+      x-requires-audit: true
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      responses:
+        '201':
+          description: Payment commitment registered
+  /reports/portfolio:
+    get:
+      summary: Portfolio and follow-up summary
+      operationId: getPortfolioReport
+      tags: [Reports]
+      x-required-permission: crm.reports.view
+      responses:
+        '200':
+          description: Portfolio report
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    ClientId:
+      name: clientId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Client:
+      type: object
+      required: [id, fullName, status, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+          enum: [new, active, follow_up, overdue, recovered, inactive]
+        assignedTo:
+          type: string
+          nullable: true
+        consentStatus:
+          type: string
+          enum: [unknown, granted, revoked, not_required]
+        riskScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
