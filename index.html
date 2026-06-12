@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Heavenly Dreams SAS de CV: reclutamiento, vacantes en telecomunicaciones y agenda de entrevistas en línea. Postúlate hoy."
+      content="Heavenly Dreams SAS de CV: reclutamiento, telecomunicaciones y desarrollo de talento en CDMX. Postúlate a nuestras vacantes."
     />
     <meta name="theme-color" content="#091623" />
-    <title>Heavenly Dreams SAS de CV | Vacantes, Postulación y Entrevistas</title>
+    <title>Heavenly Dreams 2026 | Reclutamiento y Talento</title>
     <link rel="icon" type="image/png" href="assets/heavenly-dreams-logo.png" />
     <link rel="apple-touch-icon" href="assets/heavenly-dreams-logo.png" />
     <meta property="og:image" content="assets/heavenly-dreams-logo.png" />
@@ -16,452 +16,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://wa.me" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <canvas id="particle-stage" aria-hidden="true"></canvas>
     <div class="ambient-grid" aria-hidden="true"></div>
 
-    <header class="topbar">
-      <a class="brand" href="#portada" aria-label="Heavenly Dreams inicio">
-        <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" fetchpriority="high" />
-        <span>Heavenly Dreams</span>
-      </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span>
+    <div id="app"></div>
+
+    <!-- Floating WhatsApp button always visible -->
+    <a class="whatsapp-fab" href="https://wa.me/525667477783" target="_blank" rel="noreferrer" aria-label="Contactar por WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
+
+    <!-- Chat widget -->
+    <div id="chat-widget" class="chat-widget" aria-live="polite">
+      <button class="chat-fab-btn" id="chat-toggle" type="button" aria-label="Abrir asistente Heavenly Dreams">
+        <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML+='💬';" />
       </button>
-      <nav id="site-nav" aria-label="Navegacion principal">
-        <a href="#nosotros">Nosotros</a>
-        <a href="#cultura">Cultura</a>
-        <a href="#aliados">Aliados</a>
-        <a href="#vacantes">Vacantes</a>
-        <a href="#contacto">Contacto</a>
-        <button class="nav-cta" type="button" data-open-apply>Postularme ahora</button>
-      </nav>
-    </header>
-
-    <main>
-      <section class="scene hero-scene" id="portada" data-scene>
-        <div class="scene-center">
-          <p class="kicker">Heavenly Dreams SAS de CV</p>
-          <h1>Conectamos talento con oportunidades reales de crecimiento</h1>
-          <p>
-            En Heavenly Dreams SAS de CV impulsamos carreras, fortalecemos equipos y conectamos personas con
-            empresas líderes en telecomunicaciones.
-          </p>
-          <div class="hero-actions">
-            <a class="button ghost" href="#nosotros">Conocer la empresa</a>
-            <a class="button primary" href="#vacantes">Ver vacantes</a>
-            <button class="button accent" type="button" data-open-schedule>Agendar entrevista</button>
+      <div class="chat-window" id="chat-window" aria-label="Asistente Heavenly Dreams">
+        <header class="chat-header">
+          <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" onerror="this.style.display='none'" />
+          <div>
+            <strong>Heavenly Dreams</strong>
+            <span>Asistente de reclutamiento</span>
           </div>
-        </div>
-        <div class="scroll-cue" aria-hidden="true">Explorar</div>
-      </section>
-
-      <section class="scene split-scene city-scene" id="nosotros" data-scene>
-        <div class="media-frame corporate-photo">
-          <div class="city-skyline" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <img src="assets/heavenly-dreams-brand.png" alt="Identidad corporativa Heavenly Dreams" loading="lazy" />
-        </div>
-        <div class="copy-panel">
-          <p class="kicker">Quiénes somos</p>
-          <h2>El talento correcto, en el lugar correcto, puede transformar vidas.</h2>
-          <p>
-            Somos una empresa enfocada en reclutamiento, representación comercial y desarrollo de talento dentro
-            del sector de telecomunicaciones. Nuestro compromiso es conectar a las personas con oportunidades
-            laborales reales, brindar capacitación constante y acompañar su crecimiento profesional desde el
-            primer día.
-          </p>
-          <div class="trust-grid">
-            <article data-tilt><strong>Empresa formal</strong><span>Heavenly Dreams SAS de CV</span></article>
-            <article data-tilt><strong>Sector</strong><span>Telecomunicaciones, reclutamiento y representación comercial</span></article>
-            <article data-tilt><strong>Ubicación</strong><span>Iztapalapa, Ciudad de México</span></article>
-            <article data-tilt><strong>Contacto oficial</strong><span>Reclutamiento@Heavenlydreams.com.mx</span></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="scene mission-scene" id="mision" data-scene>
-        <article class="glass-panel">
-          <p class="kicker">Misión</p>
-          <h2>Impulsar el crecimiento de empresas y candidatos mediante reclutamiento eficiente, capacitación continua y oportunidades reales.</h2>
-          <p>Trabajamos para que cada persona encuentre un espacio donde desarrollarse, generar ingresos y construir un mejor futuro.</p>
-        </article>
-        <article class="glass-panel">
-          <p class="kicker">Visión</p>
-          <h2>Ser la empresa líder en reclutamiento y desarrollo de talento en México.</h2>
-          <p>Reconocida por su profesionalismo, confianza y capacidad para formar equipos comerciales de alto rendimiento.</p>
-        </article>
-      </section>
-
-      <section class="scene orbit-scene" id="valores" data-scene>
-        <div class="orbit-core">
-          <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" loading="lazy" />
-          <span>Valores</span>
-        </div>
-        <div class="value-orbit five">
-          <article data-description="Trabajamos con transparencia, respeto y compromiso."><span>Confianza</span></article>
-          <article data-description="Impulsamos el desarrollo profesional de cada integrante."><span>Crecimiento</span></article>
-          <article data-description="Cuidamos cada proceso, cada candidato y cada oportunidad."><span>Responsabilidad</span></article>
-          <article data-description="Creemos en la colaboración como base del éxito."><span>Trabajo en equipo</span></article>
-          <article data-description="Nos enfocamos en generar oportunidades reales y crecimiento constante."><span>Resultados</span></article>
-        </div>
-      </section>
-
-      <section class="scene culture-scene" id="cultura" data-scene>
-        <div class="section-title">
-          <p class="kicker">Nuestra cultura</p>
-          <h2>Profesionalismo con cercanía, alegría y sentido humano.</h2>
-          <p>
-            En Heavenly Dreams cuidamos a nuestro equipo con acciones reales: capacitación, acompañamiento,
-            bonos, reconocimientos, materiales de trabajo y oportunidades de crecimiento.
-          </p>
-        </div>
-        <div class="culture-grid">
-          <article data-tilt><strong>Capacitación continua</strong><span>Te preparamos para crecer.</span></article>
-          <article data-tilt><strong>Bonos e incentivos</strong><span>Reconocemos tu esfuerzo.</span></article>
-          <article data-tilt><strong>Crecimiento real</strong><span>Puedes iniciar sin experiencia y desarrollarte dentro de la empresa.</span></article>
-          <article data-tilt><strong>Ambiente colaborativo</strong><span>Trabajamos en equipo y con respeto.</span></article>
-        </div>
-      </section>
-
-      <section class="scene logos-scene" id="aliados" data-scene>
-        <p class="kicker">Aliados comerciales</p>
-        <h2>Juntos generamos oportunidades dentro del sector de telecomunicaciones.</h2>
-        <p class="section-lead">
-          Colaboramos con aliados comerciales que comparten nuestra visión de crecimiento, profesionalismo y
-          desarrollo de talento.
-        </p>
-        <div class="logo-wall">
-          <article><strong>Help Grow</strong><span>SAS de CV · Desarrollo comercial</span></article>
-          <article><strong>Heavenly Dreams</strong><span>SAS de CV · Reclutamiento y talento</span></article>
-          <article><strong>Lua Vermella</strong><span>SAS de CV · Representación comercial</span></article>
-          <article><strong>Mangrowth Telecom</strong><span>SAS de CV · Telecomunicaciones</span></article>
-          <article><strong>Serolf Marketing</strong><span>SAS de CV · Estrategia y marketing</span></article>
-        </div>
-      </section>
-
-      <section class="scene results-scene" id="resultados" data-scene>
-        <p class="kicker">Resultados</p>
-        <h2>Indicadores que transmiten solidez desde el primer recorrido.</h2>
-        <div class="stats-grid">
-          <article><strong data-count="1000" data-suffix="+">0</strong><span>Candidatos colocados</span></article>
-          <article><strong data-count="100" data-suffix="+">0</strong><span>Empresas atendidas</span></article>
-          <article><strong data-text="Nacional">0</strong><span>Cobertura</span></article>
-          <article><strong data-count="95" data-suffix="%">0</strong><span>Satisfacción</span></article>
-        </div>
-      </section>
-
-      <section class="scene testimonials-scene" id="testimonios" data-scene>
-        <div class="section-title">
-          <p class="kicker">Testimonios</p>
-          <h2>Historias reales de nuestro Dream Team.</h2>
-        </div>
-        <div class="testimonial-rail">
-          <article>
-            <div class="avatar">AG</div><span>★★★★★</span>
-            <p>"El proceso fue transparente y siempre recibí acompañamiento."</p>
-            <strong>Ana García</strong><small>Atención al Cliente</small>
-          </article>
-          <article>
-            <div class="avatar">LM</div><span>★★★★★</span>
-            <p>"Gracias a Heavenly Dreams encontré una empresa donde puedo desarrollarme."</p>
-            <strong>Luis Martínez</strong><small>Supervisor</small>
-          </article>
-          <article>
-            <div class="avatar">CP</div><span>★★★★★</span>
-            <p>"Nos ayudaron a cubrir posiciones con velocidad y orden."</p>
-            <strong>Carolina Pérez</strong><small>Empresa aliada</small>
-          </article>
-        </div>
-      </section>
-
-      <section class="scene vacancies-scene" id="vacantes" data-scene>
-        <div class="section-title">
-          <p class="kicker">Vacantes disponibles</p>
-          <h2>Da tu próximo gran paso y forma parte de nuestro Dream Team.</h2>
-        </div>
-        <div class="vacancy-grid" id="vacancy-grid"></div>
-      </section>
-
-      <section class="scene ai-scene" id="agente" data-scene>
-        <div class="ai-hologram">
-          <img src="assets/chatbot-icon.png" alt="Icono del asistente Heavenly Dreams" loading="lazy" />
-          <div class="holo-ring"></div>
-        </div>
-        <div class="ai-panel">
-          <p class="kicker">Asistente</p>
-          <h2>Hola, soy el asistente de Heavenly Dreams</h2>
-          <p>Puedo ayudarte a conocer nuestras vacantes, postularte, agendar una entrevista o darte nuestra ubicación.</p>
-          <div class="ai-actions">
-            <button type="button" data-open-chat>Interactuar ahora</button>
-            <button type="button" data-open-apply>Postularme ahora</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="scene contact-scene" id="contacto" data-scene>
-        <div class="contact-copy">
-          <p class="kicker">Contacto</p>
-          <h2>Activa tu siguiente conexión.</h2>
-          <p>Av. Tláhuac 3632, Int. A 301, Col. Culhuacán, Iztapalapa, CDMX, C.P. 09800.</p>
-          <p>Reclutamiento@Heavenlydreams.com.mx · +52 56 6747 7783</p>
-          <div class="contact-actions">
-            <a class="button whatsapp" href="https://wa.me/525667477783" target="_blank" rel="noreferrer">WhatsApp</a>
-            <button class="button primary" type="button" data-open-apply>Postularme ahora</button>
-            <button class="button ghost" type="button" data-open-schedule>Agendar entrevista</button>
-          </div>
-          <p class="privacy-line">
-            Tus datos serán utilizados únicamente por Heavenly Dreams SAS de CV para fines de reclutamiento,
-            contacto y seguimiento de tu proceso. No compartiremos tu información con terceros sin tu
-            autorización.
-            <button type="button" class="link-button" data-open-privacy>Leer aviso de privacidad</button>
-          </p>
-        </div>
-        <div class="contact-form contact-info-card">
-          <h3>¿Listo para comenzar?</h3>
-          <p>Postúlate en menos de 3 minutos y agenda tu entrevista al instante.</p>
-          <ol class="steps-list">
-            <li>Llena el formulario por pasos.</li>
-            <li>Acepta el aviso de privacidad.</li>
-            <li>Elige fecha y hora de tu entrevista.</li>
-            <li>Recibe tu confirmación.</li>
-          </ol>
-          <button class="button accent full" type="button" data-open-apply>Comenzar mi postulación</button>
-        </div>
-      </section>
-
-      <section class="scene closing-scene" id="cierre" data-scene>
-        <img src="assets/heavenly-dreams-logo.png" alt="Logo Heavenly Dreams" loading="lazy" />
-        <h2>Construimos conexiones que transforman empresas y cambian vidas</h2>
-        <button class="button primary" type="button" data-open-apply>Postularme ahora</button>
-        <p class="footer-meta">
-          Heavenly Dreams SAS de CV · Iztapalapa, CDMX ·
-          <button type="button" class="link-button" data-open-privacy>Aviso de privacidad</button> ·
-          <a class="admin-link" href="admin.html">Panel administrativo</a>
-        </p>
-      </section>
-    </main>
-
-    <!-- Modal: detalle de vacante -->
-    <div class="modal" id="vacancy-modal" hidden>
-      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="vacancy-modal-title">
-        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
-        <div id="vacancy-modal-body"></div>
-      </div>
-    </div>
-
-    <!-- Modal: formulario de postulación por pasos -->
-    <div class="modal" id="apply-modal" hidden>
-      <div class="modal-card wizard" role="dialog" aria-modal="true" aria-labelledby="apply-title">
-        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
-        <h3 id="apply-title">Postulación</h3>
-        <ol class="wizard-progress" aria-hidden="true">
-          <li data-step-dot="1" class="active">Datos</li>
-          <li data-step-dot="2">Vacante</li>
-          <li data-step-dot="3">Disponibilidad</li>
-          <li data-step-dot="4">Confirmación</li>
-        </ol>
-        <form id="apply-form" novalidate>
-          <fieldset data-step="1">
-            <legend>Datos personales</legend>
-            <label>Nombre completo <input name="nombre_completo" required autocomplete="name" /></label>
-            <div class="field-row">
-              <label>Edad <input name="edad" type="number" min="18" max="80" required /></label>
-              <label>Teléfono <input name="telefono" type="tel" required autocomplete="tel" /></label>
-            </div>
-            <label>WhatsApp <input name="whatsapp" type="tel" placeholder="Si es el mismo, repítelo" required /></label>
-            <label>Correo electrónico <input name="correo" type="email" required autocomplete="email" /></label>
-            <div class="field-row">
-              <label>Alcaldía o municipio <input name="municipio" required /></label>
-              <label>Estado <input name="estado" value="Ciudad de México" required /></label>
-            </div>
-          </fieldset>
-
-          <fieldset data-step="2" hidden>
-            <legend>Vacante de interés</legend>
-            <div class="option-cards" id="vacancy-options"></div>
-            <label>¿Tienes experiencia previa?
-              <select name="experiencia" required>
-                <option value="">Selecciona una opción</option>
-                <option>Sí</option>
-                <option>No</option>
-                <option>Poca experiencia</option>
-              </select>
-            </label>
-            <label>Cuéntanos brevemente sobre tu experiencia
-              <textarea name="descripcion_experiencia" rows="3" placeholder="Opcional si no tienes experiencia"></textarea>
-            </label>
-          </fieldset>
-
-          <fieldset data-step="3" hidden>
-            <legend>Disponibilidad</legend>
-            <label>Disponibilidad de horario
-              <select name="disponibilidad" required>
-                <option value="">Selecciona una opción</option>
-                <option>Tiempo completo</option>
-                <option>Medio tiempo</option>
-                <option>Por definir</option>
-              </select>
-            </label>
-            <label>¿Puedes trabajar de lunes a sábado?
-              <select name="lunes_sabado" required>
-                <option value="">Selecciona una opción</option>
-                <option>Sí</option>
-                <option>No</option>
-                <option>Necesito confirmar</option>
-              </select>
-            </label>
-            <label>Fecha en la que podrías iniciar <input name="fecha_inicio" type="date" required /></label>
-            <label>Medio preferido de contacto
-              <select name="medio_contacto" required>
-                <option value="">Selecciona una opción</option>
-                <option>WhatsApp</option>
-                <option>Llamada</option>
-                <option>Correo</option>
-              </select>
-            </label>
-          </fieldset>
-
-          <fieldset data-step="4" hidden>
-            <legend>Confirmación y aviso de privacidad</legend>
-            <div class="summary-box" id="apply-summary"></div>
-            <p class="privacy-line">
-              Al enviar tus datos, aceptas que Heavenly Dreams SAS de CV pueda contactarte para continuar tu
-              proceso de reclutamiento. Tus datos serán utilizados únicamente con fines de selección y
-              seguimiento laboral.
-              <button type="button" class="link-button" data-open-privacy>Ver aviso completo</button>
-            </p>
-            <label class="checkbox-line">
-              <input type="checkbox" name="acepta_privacidad" required />
-              Acepto el aviso de privacidad y autorizo el contacto para fines de reclutamiento.
-            </label>
-          </fieldset>
-
-          <div class="wizard-actions">
-            <button class="button ghost" type="button" id="wizard-back" hidden>Atrás</button>
-            <button class="button primary" type="button" id="wizard-next">Continuar</button>
-            <button class="button accent" type="submit" id="wizard-submit" hidden>Enviar postulación</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Modal: éxito de postulación -->
-    <div class="modal" id="success-modal" hidden>
-      <div class="modal-card centered" role="dialog" aria-modal="true">
-        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
-        <div class="success-icon" aria-hidden="true">✓</div>
-        <h3>¡Gracias por postularte!</h3>
-        <p>Hemos recibido tu información correctamente. El siguiente paso es agendar tu entrevista.</p>
-        <div class="modal-actions">
-          <button class="button accent" type="button" data-open-schedule>Agendar entrevista ahora</button>
-          <a class="button whatsapp" id="success-whatsapp" href="#" target="_blank" rel="noreferrer">Enviar mensaje por WhatsApp</a>
-          <button class="button ghost" type="button" data-close-modal>Volver al inicio</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal: agenda de entrevista -->
-    <div class="modal" id="schedule-modal" hidden>
-      <div class="modal-card wizard" role="dialog" aria-modal="true" aria-labelledby="schedule-title">
-        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
-        <h3 id="schedule-title">Agenda tu entrevista</h3>
-        <p class="schedule-candidate" id="schedule-candidate"></p>
-        <p class="field-label">1. Elige una fecha</p>
-        <div class="chip-grid" id="schedule-dates"></div>
-        <p class="field-label">2. Elige un horario</p>
-        <div class="chip-grid" id="schedule-hours"><p class="muted">Primero selecciona una fecha.</p></div>
-        <div class="summary-box" id="schedule-summary" hidden></div>
-        <div class="wizard-actions">
-          <button class="button accent full" type="button" id="schedule-confirm" disabled>Confirmar entrevista</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal: confirmación de entrevista -->
-    <div class="modal" id="confirmation-modal" hidden>
-      <div class="modal-card centered" role="dialog" aria-modal="true">
-        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
-        <div class="success-icon" aria-hidden="true">📅</div>
-        <h3>Tu entrevista ha sido agendada correctamente</h3>
-        <p id="confirmation-detail"></p>
-        <p>
-          Te esperamos en Heavenly Dreams SAS de CV.<br />
-          <strong>Av. Tláhuac 3632, Int. A 301, Iztapalapa, CDMX, C.P. 09800.</strong><br />
-          Recibirás la confirmación por WhatsApp o correo electrónico.
-        </p>
-        <div class="modal-actions">
-          <a class="button whatsapp" id="confirmation-whatsapp" href="#" target="_blank" rel="noreferrer">Confirmar por WhatsApp</a>
-          <a class="button ghost" href="https://www.google.com/maps/search/?api=1&query=Av.+Tlahuac+3632+Iztapalapa+CDMX+09800" target="_blank" rel="noreferrer">Ver en Google Maps</a>
-          <button class="button primary" type="button" data-close-modal>Volver al inicio</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal: aviso de privacidad -->
-    <div class="modal" id="privacy-modal" hidden>
-      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
-        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
-        <h3 id="privacy-title">Aviso de privacidad</h3>
-        <p>
-          Heavenly Dreams SAS de CV, con domicilio en Av. Tláhuac 3632, Int. A 301, Col. Culhuacán, Iztapalapa,
-          CDMX, C.P. 09800, es responsable del tratamiento de tus datos personales.
-        </p>
-        <p>
-          Los datos que nos proporciones (nombre, edad, teléfono, WhatsApp, correo electrónico, ubicación,
-          experiencia y disponibilidad) serán utilizados únicamente para fines de reclutamiento, selección,
-          contacto y seguimiento de tu proceso laboral.
-        </p>
-        <p>No compartiremos tu información con terceros sin tu autorización.</p>
-        <p>
-          Para cualquier duda sobre el uso de tus datos, escríbenos a
-          <strong>Reclutamiento@Heavenlydreams.com.mx</strong> o llama al <strong>+52 56 6747 7783</strong>.
-        </p>
-        <div class="modal-actions">
-          <button class="button primary" type="button" data-close-modal>Entendido</button>
-        </div>
-      </div>
-    </div>
-
-    <aside class="chat-widget" id="chat-widget" aria-live="polite">
-      <button class="chat-fab" type="button" data-open-chat aria-label="Abrir asistente de Heavenly Dreams">
-        <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" />
-      </button>
-      <section class="chat-window" aria-label="Asistente Heavenly Dreams">
-        <header>
-          <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" />
-          <div><strong>Asistente Heavenly Dreams</strong><span>Vacantes y entrevistas</span></div>
-          <button type="button" data-close-chat aria-label="Cerrar">x</button>
+          <button type="button" id="chat-close" aria-label="Cerrar chat">✕</button>
         </header>
-        <div class="chat-messages" id="chat-messages">
-          <p class="bot">
-            Hola, soy el asistente de Heavenly Dreams. Puedo ayudarte a conocer nuestras vacantes, postularte o
-            agendar una entrevista.
-          </p>
-        </div>
-        <div class="chat-options" id="chat-options">
-          <button type="button" data-chat-option="vacantes">Ver vacantes</button>
-          <button type="button" data-chat-option="postularme">Quiero postularme</button>
-          <button type="button" data-chat-option="agendar">Agendar entrevista</button>
-          <button type="button" data-chat-option="ubicacion">Ubicación</button>
-          <button type="button" data-chat-option="whatsapp">Hablar por WhatsApp</button>
-        </div>
-        <form id="chat-form">
-          <input id="chat-input" autocomplete="off" placeholder="Escribe tu consulta..." />
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-quick-options" id="chat-quick-options"></div>
+        <form class="chat-input-form" id="chat-form">
+          <input id="chat-input" autocomplete="off" placeholder="Escribe tu mensaje..." aria-label="Mensaje" />
           <button type="submit">Enviar</button>
         </form>
-      </section>
-    </aside>
+      </div>
+    </div>
 
-    <div class="toast" id="toast" role="status"></div>
-    <script src="store.js"></script>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-box" id="modal-box">
+        <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar">✕</button>
+        <div id="modal-content"></div>
+      </div>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>
