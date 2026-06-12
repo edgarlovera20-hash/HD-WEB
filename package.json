@@ -1,0 +1,11 @@
+{
+  "name": "heavenly-dreams-web",
+  "version": "1.0.0",
+  "description": "Sitio público de reclutamiento Heavenly Dreams",
+  "scripts": {
+    "start": "node server.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
