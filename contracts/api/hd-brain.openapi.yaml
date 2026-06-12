@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Heavenly Dreams Brain API
+  version: 0.1.0
+  description: Initial API contract for HD-BRAIN control tower. HD-BRAIN observes, recommends and requests approved automations. It does not bypass RBAC or directly mutate domain records.
+servers:
+  - url: https://brain.heavenlydreams.com.mx/api/v1
+security:
+  - bearerAuth: []
+paths:
+  /kpis/global:
+    get:
+      summary: Global ecosystem KPIs
+      operationId: getGlobalKpis
+      tags: [KPIs]
+      x-required-permission: brain.view_global_kpis
+      responses:
+        '200':
+          description: Global KPI snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalKpiSnapshot'
+  /risks:
+    get:
+      summary: List detected ecosystem risks
+      operationId: listRisks
+      tags: [Risks]
+      x-required-permission: brain.view_risk_alerts
+      responses:
+        '200':
+          description: Risk list
+  /recommendations:
+    get:
+      summary: List strategic recommendations
+      operationId: listRecommendations
+      tags: [Recommendations]
+      x-required-permission: brain.view_recommendations
+      responses:
+        '200':
+          description: Recommendation list
+    post:
+      summary: Create recommendation from approved agent context
+      operationId: createRecommendation
+      tags: [Recommendations]
+      x-required-permission: brain.recommendations.create
+      x-requires-audit: true
+      responses:
+        '201':
+          description: Recommendation created
+  /automations/requests:
+    post:
+      summary: Request an automation execution
+      operationId: requestAutomation
+      tags: [Automations]
+      x-required-permission: brain.automation.request
+      x-requires-approval: true
+      x-requires-audit: true
+      responses:
+        '202':
+          description: Automation request created for approval or execution according to policy
+        '403':
+          description: Missing permission or policy approval
+  /agents:
+    get:
+      summary: List registered AI agents and their status
+      operationId: listAgents
+      tags: [Agents]
+      x-required-permission: brain.view_agents
+      responses:
+        '200':
+          description: Agent list
+  /agents/{agentId}/runs:
+    post:
+      summary: Request agent run with scoped context
+      operationId: requestAgentRun
+      tags: [Agents]
+      x-required-permission: brain.agent_runs.request
+      x-requires-audit: true
+      parameters:
+        - name: agentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Agent run requested
+  /audit/decisions:
+    get:
+      summary: List decision logs
+      operationId: listDecisionLogs
+      tags: [Audit]
+      x-required-permission: brain.view_audit_logs
+      responses:
+        '200':
+          description: Decision log list
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    GlobalKpiSnapshot:
+      type: object
+      required: [generatedAt, platforms]
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        platforms:
+          type: array
+          items:
+            type: object
+            required: [platformId, health]
+            properties:
+              platformId:
+                type: string
+                enum: [hd-web, hd-rh, hd-operations, hd-admin, hd-crm, hd-core, hd-brain]
+              health:
+                type: string
+                enum: [green, yellow, red, unknown]
+              kpis:
+                type: object
+                additionalProperties: true
+    Recommendation:
+      type: object
+      required: [id, title, source, confidence, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        source:
+          type: string
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        explanation:
+          type: string
+        requiresApproval:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
