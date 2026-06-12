@@ -4,12 +4,32 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "echo TODO lint",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
     "test": "echo TODO test",
-    "typecheck": "echo TODO typecheck",
-    "build": "echo TODO build"
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "lucide-react": "^0.546.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.15.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/node": "^22.19.19",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^5.0.4",
+    "tailwindcss": "^4.1.14",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3",
+    "prettier": "^3.8.4"
   }
 }
