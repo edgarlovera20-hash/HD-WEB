@@ -1,69 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Heavenly Dreams SAS de CV: reclutamiento, telecomunicaciones y desarrollo de talento en CDMX. Postúlate a nuestras vacantes."
-    />
-    <meta name="theme-color" content="#091623" />
-    <title>Heavenly Dreams 2026 | Reclutamiento y Talento</title>
-    <link rel="icon" type="image/png" href="assets/heavenly-dreams-logo.png" />
-    <link rel="apple-touch-icon" href="assets/heavenly-dreams-logo.png" />
-    <meta property="og:image" content="assets/heavenly-dreams-logo.png" />
-    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Heavenly Dreams — Reclutamiento, telecomunicaciones y desarrollo de talento en CDMX." />
+    <meta name="theme-color" content="#0A0F1C" />
+    <meta property="og:title" content="Heavenly Dreams" />
+    <meta property="og:description" content="Tu próxima oportunidad profesional está aquí." />
+    <title>Heavenly Dreams</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://wa.me" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <canvas id="particle-stage" aria-hidden="true"></canvas>
-    <div class="ambient-grid" aria-hidden="true"></div>
-
-    <div id="app"></div>
-
-    <!-- Floating WhatsApp button always visible -->
-    <a class="whatsapp-fab" href="https://wa.me/525667477783" target="_blank" rel="noreferrer" aria-label="Contactar por WhatsApp">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-    </a>
-
-    <!-- Chat widget -->
-    <div id="chat-widget" class="chat-widget" aria-live="polite">
-      <button class="chat-fab-btn" id="chat-toggle" type="button" aria-label="Abrir asistente Heavenly Dreams">
-        <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML+='💬';" />
-      </button>
-      <div class="chat-window" id="chat-window" aria-label="Asistente Heavenly Dreams">
-        <header class="chat-header">
-          <img src="assets/chatbot-icon.png" alt="" aria-hidden="true" loading="lazy" onerror="this.style.display='none'" />
-          <div>
-            <strong>Heavenly Dreams</strong>
-            <span>Asistente de reclutamiento</span>
-          </div>
-          <button type="button" id="chat-close" aria-label="Cerrar chat">✕</button>
-        </header>
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-quick-options" id="chat-quick-options"></div>
-        <form class="chat-input-form" id="chat-form">
-          <input id="chat-input" autocomplete="off" placeholder="Escribe tu mensaje..." aria-label="Mensaje" />
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
-      <div class="modal-box" id="modal-box">
-        <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar">✕</button>
-        <div id="modal-content"></div>
-      </div>
-    </div>
-
-    <script src="app.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
