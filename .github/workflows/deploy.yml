@@ -1,0 +1,45 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            set -e
+
+            # ── Sitio de reclutamiento (heavenly-dreams-web-2026) ──────────
+            if [ ! -d ~/heavenly-dreams-web ]; then
+              git clone https://github.com/edgarlovera20-hash/HEAVENLY-DREAMS-WEB-2026.git \
+                        ~/heavenly-dreams-web
+            fi
+            cd ~/heavenly-dreams-web
+            git pull origin main
+
+            # Aplicar configuración nginx si hay cambios
+            NGINX_CONF=~/heavenlydreams/nginx/heavenlydreams.com.mx.conf
+            if [ -f "$NGINX_CONF" ] && ! diff -q "$NGINX_CONF" \
+                /etc/nginx/sites-available/heavenlydreams.com.mx.conf \
+                > /dev/null 2>&1; then
+              sudo cp "$NGINX_CONF" \
+                       /etc/nginx/sites-available/heavenlydreams.com.mx.conf
+              sudo ln -sf /etc/nginx/sites-available/heavenlydreams.com.mx.conf \
+                          /etc/nginx/sites-enabled/heavenlydreams.com.mx.conf
+              sudo nginx -t && sudo nginx -s reload
+            fi
+
+            # Iniciar / reiniciar con pm2 en puerto 4173
+            pm2 describe heavenly-dreams-web > /dev/null 2>&1 \
+              && pm2 restart heavenly-dreams-web \
+              || pm2 start server.cjs --name heavenly-dreams-web \
+                   --env PORT=4173
+            pm2 save
