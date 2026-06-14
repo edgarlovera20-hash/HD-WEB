@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "owner": "Heavenly Dreams Architecture",
+  "decision": "Seven-platform enterprise ecosystem with strict bounded contexts",
+  "platforms": [
+    {
+      "id": "hd-web",
+      "repository": "HEAVENLY-DREAMS-WEB-2026",
+      "domain": "heavenlydreams.com.mx",
+      "type": "public_web",
+      "responsibility": "Sitio corporativo, marketing, SEO, landing pages, formularios publicos y captacion de leads.",
+      "owns": ["public_content", "landing_pages", "seo", "public_forms", "lead_generation"],
+      "must_not_own": ["admin_panel", "recruitment_operations", "crm_collections", "global_finance", "global_roles", "control_tower"]
+    },
+    {
+      "id": "hd-rh",
+      "repository": "RHDREAMSAPP2026",
+      "domain": "rh.heavenlydreams.com.mx",
+      "type": "business_application",
+      "responsibility": "Reclutamiento, candidatos, entrevistas, evaluaciones, contrataciones, expedientes y documentacion.",
+      "owns": ["jobs", "applications", "interviews", "candidate_scoring", "hiring", "employee_files", "rh_reports"],
+      "must_not_own": ["client_collections", "global_finance", "global_role_management", "control_tower"]
+    },
+    {
+      "id": "hd-operations",
+      "repository": "HD-OPERATIONS",
+      "domain": "app.heavenlydreams.com.mx",
+      "type": "business_application",
+      "responsibility": "Operacion diaria, agenda operativa, tareas, productividad, supervision y reportes operativos.",
+      "owns": ["operational_tasks", "operational_agenda", "productivity", "supervisor_workbench", "internal_notifications"],
+      "must_not_own": ["global_finance", "global_permissions", "crm_delinquency", "collections_conversations", "control_tower"]
+    },
+    {
+      "id": "hd-admin",
+      "repository": "HD-ADMIN",
+      "domain": "admin.heavenlydreams.com.mx",
+      "type": "administrative_application",
+      "responsibility": "Administracion central, finanzas, tesoreria, auditoria, usuarios, roles, permisos, integraciones y BI.",
+      "owns": ["finance", "treasury", "purchasing", "inventory", "global_payroll", "audit", "users", "roles", "permissions", "integrations", "bi"],
+      "must_not_own": ["daily_collections_conversations", "candidate_decisions", "crm_agent_initiated_messages"]
+    },
+    {
+      "id": "hd-crm",
+      "repository": "HD-CRM",
+      "domain": "crm.heavenlydreams.com.mx",
+      "type": "business_application",
+      "responsibility": "Clientes nuevos, clientes activos, seguimiento, morosos, cartera vencida, promesas de pago, conversaciones, campanas y auditoria de contacto.",
+      "owns": ["new_clients", "active_clients", "delinquent_clients", "collections", "payment_promises", "contact_history", "conversations", "campaigns", "client_risk_scoring", "crm_reports"],
+      "must_not_own": ["global_finance", "global_roles", "candidate_hiring", "control_tower_direct_actions"]
+    },
+    {
+      "id": "hd-core",
+      "repository": "HD-CORE",
+      "domain": "core.heavenlydreams.com.mx",
+      "type": "shared_platform",
+      "responsibility": "Autenticacion, autorizacion, RBAC, API client, SDK, tipos, validadores, hooks, utilities, design system, iconos y eventos compartidos.",
+      "owns": ["auth_contracts", "rbac_contracts", "api_client", "shared_types", "validators", "ui_components", "theme", "icons", "event_contracts"],
+      "must_not_own": ["domain_business_workflows", "financial_posting", "collections_execution", "candidate_decisions"]
+    },
+    {
+      "id": "hd-brain",
+      "repository": "HD-BRAIN",
+      "domain": "brain.heavenlydreams.com.mx",
+      "type": "control_tower",
+      "responsibility": "Cerebro de control total: KPIs globales, alertas, monitoreo, centro de agentes, reglas de negocio, auditoria inteligente, riesgos y orquestacion aprobada.",
+      "owns": ["global_kpis", "risk_alerts", "agent_orchestration", "business_rules", "decision_logs", "service_health", "ai_costs", "strategic_recommendations"],
+      "must_not_own": ["direct_customer_contact", "direct_candidate_hiring", "direct_financial_mutation_without_approval", "rbac_bypass", "transactional_delete"]
+    }
+  ],
+  "crossPlatformRules": [
+    "Every platform must consume identity, RBAC, theme, shared types and API contracts from HD-CORE.",
+    "HD-BRAIN may observe and recommend across platforms, but executable actions require explicit policy and audit trail.",
+    "HD-CRM is the only platform allowed to initiate customer follow-up or collections conversations.",
+    "HD-ADMIN is the only platform allowed to manage global users, roles and permissions.",
+    "HEAVENLY-DREAMS-WEB-2026 must not store sensitive business data in browser storage for production."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "version": "1.0.0",
+  "strategy": "Centralized RBAC owned by HD-ADMIN and consumed through HD-CORE",
+  "principles": [
+    "Least privilege by default",
+    "No platform may define global roles locally",
+    "Every sensitive action must generate an audit event",
+    "AI agents are service principals with explicit permissions, not superusers",
+    "HD-BRAIN cannot bypass RBAC"
+  ],
+  "roles": [
+    {
+      "id": "super_admin",
+      "scope": "global",
+      "description": "Acceso maximo administrativo con auditoria obligatoria.",
+      "permissions": ["admin.*", "audit.view", "users.*", "roles.*", "permissions.*", "integrations.*"]
+    },
+    {
+      "id": "executive",
+      "scope": "global",
+      "description": "Direccion y consulta ejecutiva.",
+      "permissions": ["brain.view_global_kpis", "brain.view_risk_alerts", "admin.view_bi", "finance.view_summary", "crm.view_reports", "rh.view_reports", "operations.view_reports"]
+    },
+    {
+      "id": "rh_manager",
+      "scope": "rh",
+      "description": "Gerencia RH.",
+      "permissions": ["rh.jobs.*", "rh.candidates.*", "rh.interviews.*", "rh.hiring.review", "rh.reports.view"]
+    },
+    {
+      "id": "operations_supervisor",
+      "scope": "operations",
+      "description": "Supervisor operativo.",
+      "permissions": ["operations.tasks.*", "operations.agenda.*", "operations.productivity.view", "operations.reports.view"]
+    },
+    {
+      "id": "crm_agent",
+      "scope": "crm",
+      "description": "Agente CRM con contacto controlado.",
+      "permissions": ["crm.clients.view_assigned", "crm.followups.create", "crm.conversations.reply", "crm.promises.create", "crm.history.create"]
+    },
+    {
+      "id": "crm_supervisor",
+      "scope": "crm",
+      "description": "Supervisor CRM y cobranza.",
+      "permissions": ["crm.clients.*", "crm.delinquency.view", "crm.assignments.*", "crm.conversations.review", "crm.campaigns.approve", "crm.reports.view"]
+    },
+    {
+      "id": "finance_manager",
+      "scope": "admin",
+      "description": "Finanzas y tesoreria.",
+      "permissions": ["finance.*", "treasury.*", "admin.view_bi", "audit.view_finance"]
+    },
+    {
+      "id": "brain_operator",
+      "scope": "brain",
+      "description": "Operador del cerebro de control con permisos limitados.",
+      "permissions": ["brain.view_global_kpis", "brain.view_risk_alerts", "brain.view_audit_logs", "brain.trigger_automation.reviewed"]
+    }
+  ],
+  "servicePrincipals": [
+    {
+      "id": "rh_agent",
+      "platform": "hd-rh",
+      "permissions": ["rh.candidates.read", "rh.scoring.create", "rh.recommendations.create"],
+      "forbidden": ["rh.hiring.final_decision", "admin.roles.update"]
+    },
+    {
+      "id": "crm_collections_agent",
+      "platform": "hd-crm",
+      "permissions": ["crm.clients.read_assigned", "crm.conversations.start_approved_template", "crm.history.create", "crm.promises.suggest"],
+      "forbidden": ["crm.promises.force", "finance.post_payment", "brain.bypass_rbac"]
+    },
+    {
+      "id": "brain_agent",
+      "platform": "hd-brain",
+      "permissions": ["brain.view_global_kpis", "brain.risk.evaluate", "brain.recommendations.create", "brain.automation.request"],
+      "forbidden": ["crm.conversations.start_direct", "finance.mutate_direct", "rh.hiring.final_decision", "admin.roles.update_direct"]
+    }
+  ],
+  "sensitiveActions": [
+    "admin.roles.update",
+    "admin.permissions.update",
+    "finance.payment.post",
+    "crm.conversations.start_automated",
+    "crm.payment_promise.modify",
+    "rh.hiring.final_decision",
+    "brain.trigger_automation.approve"
+  ]
+}

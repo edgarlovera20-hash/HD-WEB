@@ -1,6 +1,26 @@
 # Heavenly Dreams Web 2026
 
-Web interactiva de reclutamiento para Heavenly Dreams SAS de CV: página institucional + embudo de postulación con agenda de entrevistas y panel administrativo.
+Sitio corporativo y prototipo historico de captacion/reclutamiento para Heavenly Dreams SAS de CV.
+
+## Estado arquitectonico
+
+Este repositorio queda alineado al ecosistema enterprise de 7 plataformas. Su responsabilidad final debe ser exclusivamente:
+
+```text
+heavenlydreams.com.mx
+Sitio corporativo, marketing, SEO, landing pages, formularios publicos y lead generation.
+```
+
+Las capacidades internas deben migrarse a plataformas separadas:
+
+```text
+rh.heavenlydreams.com.mx     -> RHDREAMSAPP2026
+app.heavenlydreams.com.mx    -> HD-OPERATIONS
+admin.heavenlydreams.com.mx  -> HD-ADMIN
+crm.heavenlydreams.com.mx    -> HD-CRM
+core.heavenlydreams.com.mx   -> HD-CORE
+brain.heavenlydreams.com.mx  -> HD-BRAIN
+```
 
 ## Ejecutar localmente
 
@@ -11,28 +31,64 @@ node server.cjs
 Abrir:
 
 ```text
-http://127.0.0.1:4173/             # Sitio público
-http://127.0.0.1:4173/admin.html   # Panel administrativo (clave de prototipo: HD2026)
+http://127.0.0.1:4173/             # Sitio publico
+http://127.0.0.1:4173/admin.html   # Panel administrativo de prototipo
 ```
 
-## Incluye
+## Advertencia de produccion
 
-- Landing institucional: quiénes somos, misión, visión, valores, cultura y aliados comerciales
-- Tarjetas de confianza con datos oficiales de la empresa
-- 3 vacantes activas con detalle (propósito, funciones, requisitos, beneficios)
-- Formulario de postulación por pasos (datos personales → vacante → disponibilidad → consentimiento)
-- Aviso de privacidad con checkbox obligatorio
-- Agenda de entrevistas con fechas (lunes a sábado) y horarios disponibles
-- Confirmación con dirección, Google Maps y mensaje prellenado de WhatsApp
-- Asistente tipo chat con opciones rápidas (vacantes, postulación, agenda, ubicación, WhatsApp)
-- Panel administrativo: estadísticas, tabla de candidatos con filtros y búsqueda, cambio de estado, reagendado, WhatsApp directo y exportación a CSV
-- Estados del candidato: Nuevo registro, Pendiente de agendar, Entrevista agendada, Asistencia confirmada, Reagendar, No asistió, En proceso, Contratado, Descartado
+El panel administrativo, el uso de `localStorage`, `sessionStorage` y cualquier clave local son aceptables solo como prototipo. Para produccion deben reemplazarse por API real, autenticacion backend, RBAC, auditoria y contratos compartidos desde HD-CORE.
 
-## Arquitectura
+## Documentacion enterprise
 
-- HTML/CSS/JS sin dependencias (servidor estático en `server.cjs`)
-- `store.js`: capa de datos compartida (vacantes, candidatos, entrevistas) sobre `localStorage`, lista para sustituirse por una API real (backend, n8n, Google Calendar, WhatsApp Business)
-- `app.js`: lógica del sitio público (modales, wizard, agenda, chatbot)
-- `admin.js`: lógica del panel administrativo
+```text
+docs/ENTERPRISE_ARCHITECTURE.md
+docs/ECOSYSTEM_7_PLATFORMS.md
+docs/RESTRUCTURING_BACKLOG.md
+```
 
-> Nota: al ser un prototipo sin backend, los datos viven en el navegador (localStorage) y la clave del panel es local. Para producción conecta `store.js` a una API y agrega autenticación real.
+## Contratos iniciales
+
+```text
+contracts/platforms/platform-boundaries.v1.json
+contracts/rbac/permissions.v1.json
+contracts/events/ecosystem-events.v1.json
+contracts/api/hd-crm.openapi.yaml
+contracts/api/hd-brain.openapi.yaml
+```
+
+## Blueprints
+
+```text
+blueprints/HD-CRM/README.md
+blueprints/HD-BRAIN/README.md
+```
+
+## Incluye actualmente
+
+- Landing institucional: quienes somos, mision, vision, valores, cultura y aliados comerciales.
+- Tarjetas de confianza con datos oficiales de la empresa.
+- Vacantes activas con detalle.
+- Formulario de postulacion por pasos.
+- Aviso de privacidad con checkbox obligatorio.
+- Agenda de entrevistas.
+- Confirmacion con direccion, Google Maps y mensaje prellenado de WhatsApp.
+- Asistente tipo chat con opciones rapidas.
+- Panel administrativo de prototipo.
+
+## Arquitectura actual
+
+- HTML/CSS/JS sin dependencias.
+- Servidor estatico en `server.cjs`.
+- `store.js`: capa de datos compartida sobre `localStorage`.
+- `app.js`: logica del sitio publico.
+- `admin.js`: logica del panel administrativo de prototipo.
+
+## Proxima migracion recomendada
+
+1. Congelar nuevas funcionalidades internas en este repo.
+2. Mantener solo sitio corporativo y formularios publicos.
+3. Enviar leads de clientes hacia HD-CRM.
+4. Enviar postulaciones hacia RHDREAMSAPP2026.
+5. Reemplazar almacenamiento local por API Gateway.
+6. Consumir diseno, validaciones y auth desde HD-CORE.

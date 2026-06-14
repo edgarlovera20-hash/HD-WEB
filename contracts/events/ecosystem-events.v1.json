@@ -1,0 +1,127 @@
+{
+  "version": "1.0.0",
+  "strategy": "Domain events for API Gateway, n8n, HD-BRAIN and audit pipelines",
+  "namingConvention": "domain.entity.action",
+  "requiredEnvelope": {
+    "eventId": "uuid",
+    "eventName": "string",
+    "version": "semver",
+    "occurredAt": "iso-8601",
+    "producer": "platform-id",
+    "actor": {
+      "type": "user|service_principal|system",
+      "id": "string"
+    },
+    "correlationId": "uuid",
+    "payload": "object"
+  },
+  "events": [
+    {
+      "name": "web.lead.created",
+      "producer": "hd-web",
+      "consumers": ["hd-crm", "hd-brain", "n8n"],
+      "description": "Public lead created from the corporate website.",
+      "sensitive": false
+    },
+    {
+      "name": "rh.candidate.created",
+      "producer": "hd-rh",
+      "consumers": ["hd-brain", "n8n"],
+      "description": "New candidate registered in the recruitment platform.",
+      "sensitive": true
+    },
+    {
+      "name": "rh.interview.scheduled",
+      "producer": "hd-rh",
+      "consumers": ["n8n", "hd-brain"],
+      "description": "Candidate interview scheduled.",
+      "sensitive": true
+    },
+    {
+      "name": "crm.client.created",
+      "producer": "hd-crm",
+      "consumers": ["hd-admin", "hd-brain", "n8n"],
+      "description": "Client created in CRM.",
+      "sensitive": true
+    },
+    {
+      "name": "crm.client.assigned",
+      "producer": "hd-crm",
+      "consumers": ["hd-brain", "n8n"],
+      "description": "Client assigned to a human agent or team.",
+      "sensitive": true
+    },
+    {
+      "name": "crm.account_status.overdue_detected",
+      "producer": "hd-crm",
+      "consumers": ["hd-admin", "hd-brain", "n8n"],
+      "description": "Client account requires follow-up due to overdue status.",
+      "sensitive": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "crm.conversation.started",
+      "producer": "hd-crm",
+      "consumers": ["hd-brain", "audit-service"],
+      "description": "Conversation started with approved policy and template.",
+      "sensitive": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "crm.conversation.escalated_to_human",
+      "producer": "hd-crm",
+      "consumers": ["hd-brain", "n8n", "audit-service"],
+      "description": "Conversation transferred to a human agent.",
+      "sensitive": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "crm.payment_commitment.created",
+      "producer": "hd-crm",
+      "consumers": ["hd-admin", "hd-brain", "n8n"],
+      "description": "Client payment commitment registered.",
+      "sensitive": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "crm.payment_commitment.missed",
+      "producer": "hd-crm",
+      "consumers": ["hd-admin", "hd-brain", "n8n"],
+      "description": "Client payment commitment missed and requires review.",
+      "sensitive": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "finance.payment.recorded",
+      "producer": "hd-admin",
+      "consumers": ["hd-crm", "hd-brain"],
+      "description": "Payment recorded by administration/finance.",
+      "sensitive": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "brain.risk.detected",
+      "producer": "hd-brain",
+      "consumers": ["hd-admin", "hd-operations", "hd-crm", "n8n"],
+      "description": "Global operational or financial risk detected by control tower.",
+      "sensitive": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "brain.automation.requested",
+      "producer": "hd-brain",
+      "consumers": ["n8n", "audit-service"],
+      "description": "HD-BRAIN requests an approved automation execution.",
+      "sensitive": true,
+      "requiresApproval": true,
+      "requiresAudit": true
+    },
+    {
+      "name": "audit.action.recorded",
+      "producer": "audit-service",
+      "consumers": ["hd-admin", "hd-brain"],
+      "description": "Sensitive action recorded in audit trail.",
+      "sensitive": true
+    }
+  ]
+}
